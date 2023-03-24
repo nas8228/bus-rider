@@ -2,7 +2,6 @@
 
 ## Overview
 
----
 
 An Electron desktop app which allows the user to publish key/value Kafka messages for the purpose of testing Kafka consumers and producers without the need for costly licenses to use third-party applications. Supports producing and consuming non-keyed messages.
 
@@ -10,7 +9,6 @@ An Electron desktop app which allows the user to publish key/value Kafka message
 
 ## Running the Application
 
----
 
 `npm run start`
 
@@ -18,19 +16,16 @@ Debugging can be done within the application using the Chromium Developer Tools 
 
 ## Building the ZIP Archive
 
----
 
 `npm run make --targets @electron-forge/maker-zip`
 
 ## Install the Desktop Application
 
----
 
 Unzip in the desired location
 
 ## Using the Application
 
----
 
 ### Requirements
 
@@ -39,6 +34,7 @@ Unzip in the desired location
 -   Kafka Cluster access credentials
 
 ### Setup
+Add your authorization ceritifcate for Kafka to `/cert` with the name  `cacert.pem`
 
 Upon opening the Kafkatizer, the user is greeted with the settings configuration. Here, the user is required to provide the following:
 
