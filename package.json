@@ -1,0 +1,52 @@
+{
+    "name": "bus-rider",
+    "version": "1.0.0",
+    "description": "Simple Node.js Desktop Application used to consume and produce messages on Kafka",
+    "main": "./src/main.js",
+    "scripts": {
+        "start": "electron-forge start",
+        "package": "electron-forge package",
+        "make": "electron-forge make --targets @electron-forge/maker-zip",
+        "test": "jest"
+    },
+    "keywords": [
+        "Electron",
+        "Node",
+        "Kafka",
+        "Hackathon"
+    ],
+    "author": "nate smith",
+    "license": "CC0-1.0",
+    "dependencies": {
+        "bootstrap": "4.2.1",
+        "electron-squirrel-startup": "^1.0.0",
+        "jquery": "3.3.1",
+        "kafkajs": "^1.16.0"
+    },
+    "devDependencies": {
+        "@electron-forge/cli": "^6.0.0-beta.63",
+        "@electron-forge/maker-deb": "^6.0.0-beta.63",
+        "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+        "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+        "@electron-forge/maker-zip": "^6.0.0-beta.63",
+        "browser-sync": "2.26.3",
+        "electron": "^4.0.4",
+        "gulp": "4.0.0",
+        "jest": "^27.5.1"
+    },
+    "config": {
+        "forge": {
+            "packagerConfig": {
+                "ignore": [
+                    "/builds/",
+                    "/tests/"
+                ]
+            },
+            "makers": [
+                {
+                    "name": "@electron-forge/maker-zip"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>Bus Rider</title>
+
+        <!-- Bootstrap core CSS -->
+        <link
+            href="../vendor/bootstrap/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Bus Rider</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#" onclick="showModal()"
+                                ><span
+                                    ><img
+                                        src="../assets/gear.png"
+                                        style="
+                                            position: relative;
+                                            max-height: 15px;
+                                        " /></span
+                            ></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a
+                                class="nav-link"
+                                href="#"
+                                id="connection"
+                                style="color: orangered"
+                                >DISCONNECTED</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+
+        <div class="container disabled" id="container">
+            <div class="hidden" id="spinner">
+                <div class="lds-default">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="row" style="float: right" id="version"></div>
+            <div class="row mb-3">
+                <div class="col text-center">
+                    <h2 class="mt-5">Produce a Kafka Message</h2>
+
+                    <label for="topicProduce">Topic</label>
+                    <br />
+                    <input
+                        list="topicProduceList"
+                        type="type"
+                        class="form-control"
+                        id="topicProduce"
+                        name="topicProduce"
+                        onkeyup="filterTopics('topicProduce', 'topicProduceList')"
+                    />
+                    <datalist id="topicProduceList"> </datalist>
+                    <br />
+                    <button id="btnPublish" class="btn btn-primary">
+                        Produce
+                    </button>
+                    <br />
+                    <br />
+                    <label for="keyInput">Key</label>
+                    <div class="text-right">
+                        <button
+                            class="btn btn-link"
+                            style="padding: 0"
+                            onclick="clearElement('produce')"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                    <textarea
+                        class="form-control"
+                        rows="5"
+                        id="keyInput"
+                        name="key"
+                    ></textarea>
+                    <br />
+                    <label for="valueInput">Value</label>
+                    <br />
+                    <textarea
+                        class="form-control"
+                        rows="17"
+                        id="valueInput"
+                        name="value"
+                    ></textarea>
+                    <br />
+                </div>
+
+                <div class="col text-center">
+                    <h2 class="mt-5">Consume a Kafka Message</h2>
+
+                    <label for="topicConsume">Topic</label>
+                    <br />
+                    <input
+                        list="topicConsumeList"
+                        type="type"
+                        class="form-control"
+                        id="topicConsume"
+                        name="topicConsume"
+                        onkeyup="filterTopics('topicConsume', 'topicConsumeList')"
+                    />
+                    <datalist id="topicConsumeList"> </datalist>
+                    <br />
+                    <button id="btnConsume" class="btn btn-success">
+                        Consume
+                    </button>
+                    <br />
+                    <br />
+                    <label for="messages">Messages</label>
+                    <div class="text-right">
+                        <button
+                            class="btn btn-link"
+                            style="padding: 0"
+                            onclick="clearElement('consume')"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                    <div
+                        class="container-fluid"
+                        id="messages"
+                        name="messages"
+                    ></div>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+
+        <div id="modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div id="modalContent" class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Settings</h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                            onclick="closeModal()"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="darkMode">Theme</label>
+                        <div>
+                            <label class="switch">
+                                <span id="darkMode-text" class="darkMode-text"
+                                    >Dark Mode</span
+                                >
+                                <input type="checkbox" id="darkMode" />
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <label for="groupId">Group ID</label>
+                        <input id="groupId" class="form-control" />
+                        <label for="brokerUrl">Bootstrap Server</label>
+                        <input id="brokerUrl" class="form-control" />
+                        <label for="uName">Username</label>
+                        <input id="uName" class="form-control" />
+                        <label for="pWord">Password</label>
+                        <input id="pWord" class="form-control" />
+                        <label for="timeout">Connection Timeout (in ms)</label>
+                        <input id="timeout" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                            id="connect"
+                            type="button"
+                            class="btn btn-primary"
+                            data-dismiss="modal"
+                            onclick="connect()"
+                        >
+                            Connect
+                        </button>
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript -->
+        <script src="../vendor/jquery/jquery.min.js"></script>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            //load in node libraries
+            require('./renderer.js');
+
+            const connectBtn = document.getElementById('connect');
+            connectBtn.disabled = requireFields();
+
+            // for electron
+            if (typeof require !== 'undefined') {
+                const currentWebContents =
+                    require('electron').remote.getCurrentWebContents();
+                document.addEventListener(
+                    'keyup',
+                    ({ key, ctrlKey, shiftKey, metaKey, altKey }) => {
+                        // for electron debugging
+                        if (
+                            key === 'F12' ||
+                            (ctrlKey && shiftKey && key === 'I') ||
+                            (metaKey && altKey && key === 'i')
+                        ) {
+                            currentWebContents.openDevTools();
+                        }
+
+                        connectBtn.disabled = requireFields();
+                    }
+                );
+            }
+        </script>
+    </body>
+</html>

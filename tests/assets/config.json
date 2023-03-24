@@ -1,0 +1,1 @@
+{"kafkaSettings":{"groupId":"testGroup","brokerUrl":"testBroker","userName":"testUser","password":"testPassword","timeout":"1000", "darkMode":"0"}}
